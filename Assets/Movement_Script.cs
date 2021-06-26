@@ -5,8 +5,9 @@ using UnityEngine;
 public class Movement_Script : MonoBehaviour
 {
     
-    public float movementSpeed = 300f;
+    public float movementSpeed = 600f;
     public Rigidbody2D playerRB;
+    public GameObject manager;
     
     // Start is called before the first frame update
     void Start()
@@ -18,6 +19,7 @@ public class Movement_Script : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (manager.GetComponent<GameManager>().gameStarted) {
         if(Input.GetKey(KeyCode.LeftArrow)) 
         {
             ///move player to the left
@@ -46,7 +48,7 @@ public class Movement_Script : MonoBehaviour
                 
 
         }
-
+       }
             
     }
 
@@ -54,6 +56,7 @@ public class Movement_Script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (manager.GetComponent<GameManager>().gameStarted) {
         if(Input.GetKey(KeyCode.RightArrow)) 
         {
             //transform.Translate(Vector3.right *movementSpeed);
@@ -85,16 +88,9 @@ public class Movement_Script : MonoBehaviour
         {
             GetComponent<Animator>().Play("Idle");
         }
-
+        }
 
     }
 
-    //this will get called when the player collides with another object with a collider on it
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        // if(collision.gameObject.name == "Ground")
-        // {
-        //     isGrounded = true;
-        // }
-    }
+    
 }
